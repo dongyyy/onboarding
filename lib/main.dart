@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:onboarding/darkmode/config_repo.dart';
 import 'package:onboarding/darkmode/config_vm.dart';
 import 'package:onboarding/screens/go_router/router.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -11,9 +11,11 @@ void main() async {
   final preferences = await SharedPreferences.getInstance();
   final repository = ConfigRepository(preferences);
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => ConfigViewModel(repository))
-  ], child: const MyApp()));
+  runApp(ProviderScope(
+    overrides: [
+      configProvider.overrideWith(() => ConfigViewModel(repository))
+    ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

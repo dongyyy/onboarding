@@ -1,21 +1,25 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:onboarding/darkmode/config_model.dart';
 import 'package:onboarding/darkmode/config_repo.dart';
 
-class ConfigViewModel extends ChangeNotifier{
+class ConfigViewModel extends Notifier<ConfigModel>{
   final ConfigRepository _repository;
-
-  late final ConfigModel _model = ConfigModel(
-    darkMode: _repository.isDarkMode()
-  );
 
   ConfigViewModel(this._repository);
 
-  bool get darkMode => _model.darkMode;
-
   void setDarkMode(bool value){
     _repository.setDarkMode(value);
-    _model.darkMode = value;
-    notifyListeners();
+    state = ConfigModel(darkMode: value);
+  }
+
+  @override
+  build() {
+    return ConfigModel(
+        darkMode: _repository.isDarkMode()
+    );
   }
 }
+
+final configProvider = NotifierProvider<ConfigViewModel, ConfigModel>(
+      () => throw UnimplementedError(),
+);

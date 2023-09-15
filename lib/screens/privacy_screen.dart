@@ -15,16 +15,16 @@ class PrivacyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
-        foregroundColor: context.watch<ConfigModel>().darkMode ? Colors.white : Colors.black,
-        backgroundColor:  context.watch<ConfigModel>().darkMode ? Colors.black :Colors.white,
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text('Privacy'),
       ),
       body: ListView(
         children: [
           const SwitchListTileExample(),
-          SwitchListTile.adaptive(value: context.watch<ConfigViewModel>().darkMode,
-              onChanged: (value) => context.read<ConfigViewModel>().setDarkMode(value),
+          SwitchListTile.adaptive(value: false,
+              onChanged: (value) => (),
             title: const Text("Dark Mode",),
             subtitle:  const Text("Dark Mode on"),
           ),
