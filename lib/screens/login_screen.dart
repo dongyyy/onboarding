@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:onboarding/constants/gaps.dart';
-import 'package:onboarding/constants/sizes.dart';
-import 'package:onboarding/screens/username_screen.dart';
 
+import '../constants/gaps.dart';
+import '../constants/sizes.dart';
 import '../widgets/auth_button.dart';
-import 'login_screen.dart';
+import 'login_form_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  void _onSignUpTap(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
-  void _onEmailTap(BuildContext context) {
+  void _onEmailLoginTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const UsernameScreen(),
+        builder: (context) => const LoginFormScreen(),
       ),
     );
   }
@@ -35,53 +30,33 @@ class HomeScreen extends StatelessWidget {
             horizontal: Sizes.size40,
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              Gaps.v32,
-              const FaIcon(
-                FontAwesomeIcons.twitter,
-                color: Colors.blue,
-                size: Sizes.size32,
-              ),
               Gaps.v80,
               const Text(
-                "See what's happening",
+                "Log in to TikTok",
                 style: TextStyle(
-                  fontSize: Sizes.size28,
-                  fontWeight: FontWeight.w900,
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w700,
                 ),
-                textAlign: TextAlign.left,
               ),
+              Gaps.v20,
               const Text(
-                "in the world right now.",
+                "Manage your account, check notifications, comment on videos, and more.",
                 style: TextStyle(
-                  fontSize: Sizes.size28,
-                  fontWeight: FontWeight.w900,
+                  fontSize: Sizes.size16,
+                  color: Colors.black45,
                 ),
-                textAlign: TextAlign.left,
+                textAlign: TextAlign.center,
               ),
-              // const Text(
-              //   "Create a profile, follow other accounts, make your own videos, and more.",
-              //   style: TextStyle(
-              //     fontSize: Sizes.size16,
-              //     color: Colors.black45,
-              //   ),
-              //   textAlign: TextAlign.center,
-              // ),
               Gaps.v40,
               GestureDetector(
-                onTap: () => _onEmailTap(context),
+                onTap: () => _onEmailLoginTap(context),
                 child: const AuthButton(
-                  icon: FaIcon(FontAwesomeIcons.google),
-                  text: "Continue with google",
+                  icon: FaIcon(FontAwesomeIcons.user),
+                  text: "Use email & password",
                 ),
               ),
               Gaps.v16,
-              const AuthButton(
-                icon: FaIcon(FontAwesomeIcons.apple),
-                text: "Continue with Apple",
-              ),
-
               const AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
@@ -101,16 +76,16 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Already have an account?',
+                "Don't have an account?",
                 style: TextStyle(
                   fontSize: Sizes.size16,
                 ),
               ),
               Gaps.h5,
               GestureDetector(
-                onTap: () => _onLoginTap(context),
+                onTap: () => _onSignUpTap(context),
                 child: Text(
-                  'Log in',
+                  "Sign up",
                   style: TextStyle(
                     fontSize: Sizes.size16,
                     fontWeight: FontWeight.w600,
